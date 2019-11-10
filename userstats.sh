@@ -1,8 +1,46 @@
 #!/bin/bash
 
-
 #output: nome_utilizador numero_sessões tempo_total duraçao_max duraçao_min
 #tempo vem em minutos
+
+# users-variavel para auxiliar a contruçao do output do programa
+# vai servir para verificar quantos sessões cada utilizador tem
+# para isso utilizar um array associativo em que a cada indice(nome do utlizador) esta associado o numero de sessões
+
+
+
+# grep "\S"-remove todas as linhas em branco
+
+users=$(last|awk '{print $1}'| grep "\S")
+# numberUsers=$(last|awk "{print $1}| wc- w")
+
+
+# declarar um array associativo
+
+declare -A user
+
+
+for i in $users
+do
+    if [ -z ${user[$i]} ];then
+        user[$i]=1 
+        
+    else
+        user[$i]= $((user[$i]++))
+
+    fi
+    
+
+done
+
+
+# for x in "${!user[@]}"
+# do  
+    # echo "${x}"
+    # echo "${user[$x]}"
+# done
+
+
 
 # opções:
 # "-g"-filtrar por grupo
@@ -21,6 +59,8 @@
 
 #$OPTARG-variavel passada como argumento da função
 #Ex: -f nome -> $OPTARG=nome
+
+unset Name EXP_REGULAR INICIO FIM CAMINHO
 
 while getopts "gu:s:e:f:rntai" arg; do
     case $arg in
