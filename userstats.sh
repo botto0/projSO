@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 #output: nome_utilizador numero_sessões tempo_total duraçao_max duraçao_min
 #tempo vem em minutos
@@ -20,17 +20,16 @@ for i in $users; do
         user[$i]=1
 
     else
-        ((user[$i]++))
+        let "user[$i]++"
 
     fi
 
 done
-echo ${user[*]}
 
-# for x in "${!user[@]}"; do
-#     echo "${x}"
-#     echo "${user[$x]}"
-# done
+for x in "${!user[@]}"; do
+    echo "${x}"
+    echo "${user[$x]}"
+done
 
 # opções:
 # "-g"-filtrar por grupo
