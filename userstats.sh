@@ -1,4 +1,5 @@
 #!/bin/bash
+<<<<<<< HEAD
 
 #output: nome_utilizador numero_sessões tempo_total duraçao_max duraçao_min
 #tempo vem em minutos
@@ -76,4 +77,37 @@ while getopts "gu:s:e:f:rntai" arg; do
     "i")  ;;  
     esac
     echo "argumento : $INICIO!"
+=======
+declare -a info_total
+declare -a info_filtrada
+
+info_filtrada[0] =lucas
+
+for i in "${info_filtrada[@]}"
+do
+echo $i
+>>>>>>> 5211d76f09b178e4ce1687929d8ba7fef9562c1f
 done
+# if [ "$#" -eq 0 ]; then
+#     echo "teste"
+# fi
+# if (("$#" > 0)); then
+#     while getopts "gusefrntai" arg; do
+#         case $arg in
+#         "g")
+#             last | awk '{print $1, user++ }' | sort -
+#             Name=$arg
+#             ;;
+#         "u") Name=$arg ;;
+#         "s") Name=$arg ;;
+#         "e") Name=$arg ;;
+#         "f") Name=$arg ;;
+#         "r") Name=$arg ;;
+#         "n") Name=$arg ;;
+#         "t") Name=$arg ;;
+#         "a") Name=$arg ;;
+#         "i") Name=$arg ;;
+#         esac
+#         echo "argumento : $Name"
+#     done
+# fi
