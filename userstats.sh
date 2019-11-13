@@ -8,22 +8,21 @@
 # para isso utilizar um array associativo em que a cada indice(nome do utlizador) esta associado o numero de sessões
 
 # grep "\S"-remove todas as linhas em branco
-declare -A user
 
 users=$(last | awk '{print $1}' | grep "\S")
 # numberUsers=$(last|awk "{print $1}| wc- w")
+users_time=$(last | awk '{print $9}' | grep "\S")
 
 # declarar um array associativo
+declare -A user
+declare -A user_time
 
 for i in $users; do
     if [ -z ${user[$i]} ]; then
         user[$i]=1
-
     else
         let "user[$i]++"
-
     fi
-
 done
 
 for x in "${!user[@]}"; do
@@ -31,6 +30,20 @@ for x in "${!user[@]}"; do
     echo "${user[$x]}"
 done
 
+echo "-------------------------------------------------------------"
+
+for i in $users_time; do
+    if [ -z ${user[$i]} ]; then
+        user[$i]=1
+    else
+        let "user[$i]++"
+    fi
+done
+
+for x in "${!user_time[@]}"; do
+    echo "${x}"
+    echo "${user_time[$x]}"
+done
 # opções:
 # "-g"-filtrar por grupo
 # "-u "-filtra por expressão regular que verificada pelo nome do utilizador
