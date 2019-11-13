@@ -11,11 +11,10 @@
 
 users=$(last | awk '{print $1}' | grep "\S")
 # numberUsers=$(last|awk "{print $1}| wc- w")
-users_time=$(last | awk '{print $9}' | grep "\S")
+
 
 # declarar um array associativo
 declare -A user
-declare -A user_time
 
 for i in $users; do
     if [ -z ${user[$i]} ]; then
@@ -26,24 +25,30 @@ for i in $users; do
 done
 
 for x in "${!user[@]}"; do
-    echo "${x}"
-    echo "${user[$x]}"
+    echo "${x}" #k
+    echo "${user[$x]}" #v
 done
 
 echo "-------------------------------------------------------------"
 
-for i in $users_time; do
-    if [ -z ${user[$i]} ]; then
-        user[$i]=1
-    else
-        let "user[$i]++"
+declare -A user_time
+
+users_times=$(last | awk '{print $9}' | grep "\S")
+
+for i in $users_times; do 
+    if [[ $i != "in" &&  -z user_time ]] ; then # $i != "in" nao esta a retirar dos tempos o 'in' nao sei porque 
+        user_time[$i] = 1
+    else 
+        let "user_time[$i]++"
     fi
 done
 
-for x in "${!user_time[@]}"; do
-    echo "${x}"
-    echo "${user_time[$x]}"
+for i in "${!user_time[@]}"; do
+    echo "${i}"
+    echo "${user_time[$i]}"
 done
+
+
 # opções:
 # "-g"-filtrar por grupo
 # "-u "-filtra por expressão regular que verificada pelo nome do utilizador
