@@ -47,22 +47,28 @@ for i in "${!user_time[@]}"; do
     echo "${user_time[$i]}"
 done
 
-# a funcao que converte o tempo em minutos
+# a funçao que converte o tempo em minutos
 function convertTime(){
-	horas=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
-	minutos=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
-	horas_new= $(echo $horas | sed 's/^0*//')
-	minutos_new= $(echo $minutos | sed 's/^0*//')
-	echo "HORAS*60 + MINUTOS"
-	echo $((horas_new*60 + minutos_new))
+
+     horas=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
+     minutos=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
+     
+     echo $((horas#0))
+
+
+
+
+
 }
+    x=$( echo "${user_time["miguel"]}" | awk '{print $6}'| grep -v "in") 
 
-
-
-x=$( echo "${user_time["nlau"]}" | awk '{print $6}'| grep -v "in")
-for i in "$x";do
-	convertTime "$i"
+    for i in "$x"
+do
+    convertTime "$i"
 done
+
+
+
 
 # opções:
 # "-g"-filtrar por grupo
