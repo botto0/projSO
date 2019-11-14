@@ -17,12 +17,16 @@ users=$(last $USERS | column -t| awk '{print $1}' | grep "\S")
 declare -A user
 
 for i in $users; do
+
+if [[ "$i" != "reboot" ]] && [[ "$i" != "wtmp" ]];then
     if [ -z ${user[$i]} ]; then
         user[$i]=1
     else
         let "user[$i]++"
     fi
+    fi
 done
+
 
 for x in "${!user[@]}"; do
     printf "%s  %s\n" $x ${user[$x]}
@@ -56,16 +60,9 @@ declare -A user_time
 
 #users_times=$(last | awk '{print $9}' | grep "\S")
 
-LAST=$(last)
-
-# for x in "${!user[@]}"
-# do
-#     u=$(grep "$x")
-#     if [ "$u" == "reboot "];then
-#     users_time[$x]=$(last| grep "$u" | awk '{for(i=5;i<11;i++) print }' 
-
-
-#     unset u
+for u in "${!user[@]}";do
+    user_time[$u]=$(last | grep "${u}"| awk '{print $5, $6, $7, $8, $9 ,$10}')
+done
 
 for i in "${!user_time[@]}"; do
     echo "${i}"
