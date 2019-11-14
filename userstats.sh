@@ -50,18 +50,22 @@ done
 # a funçao que converte o tempo em minutos
 function convertTime(){
 
-    tempo=$1 
-    t=$(tempo:2:5)
-    a=${cut -d':'}
-    echo $t
-    
+     horas=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
+     minutos=$( echo "$1" | tr -d '()'| cut -d':' -f 1)
+     
+     echo $((horas#0))
+
+
+
 
 
 }
-    x= $( echo "${user_time["miguel"]}" | awk '{print $6}' ) 
-    echo "---"  
-    echo ""
+    x=$( echo "${user_time["miguel"]}" | awk '{print $6}'| grep -v "in") 
 
+    for i in "$x"
+do
+    convertTime "$i"
+done
 
 
 
