@@ -34,31 +34,9 @@ done
 
 echo "-------------------------------------------------------------"
 
-# Para obter os campos de tempo atraves do awk não se consegue para os casos do rebbot e wtmp pois os campos estão decalibrados
-#relativamente ao aos utlizadores 
-
-# miguel  :0      Wed   Nov  13   23:14     still  logged  in
-# reboot  system  boot  Wed  Nov  13        23:14  still   running
-# miguel  :0      Tue   Nov  12   09:20     -      14:45   (05:24)
-# reboot  system  boot  Tue  Nov  12        09:20  -       14:45    (05:24)
-# miguel  :0      Mon   Nov  11   12:25     -      21:23   (08:58)
-# reboot  system  boot  Mon  Nov  11        12:24  -       21:23    (08:58)
-# miguel  :0      Sun   Nov  10   10:55     -      down    (22:18)
-# reboot  system  boot  Sun  Nov  10        10:55  -       09:14    (22:18)
-# miguel  :0      Sun   Nov  10   10:51     -      10:55   (00:03)
-# reboot  system  boot  Sun  Nov  10        10:51  -       10:55    (00:04)
-# miguel  :0      Sun   Nov  10   10:44     -      crash   (00:06)
-# reboot  system  boot  Sun  Nov  10        10:44  -       10:55    (00:10)
-# miguel  tty1    Sun   Nov  10   10:18     -      10:44   (00:25)
-# reboot  system  boot  Sun  Nov  10        10:18  -       10:44    (00:25)
-# miguel  tty1    Sun   Nov  10   10:00     -      10:16   (00:16)
-# reboot  system  boot  Sun  Nov  10        10:00  -       10:18    (00:18)
-# wtmp    begins  Sun   Nov  10   09:59:52  2019
-
 
 declare -A user_time
 
-#users_times=$(last | awk '{print $9}' | grep "\S")
 
 for u in "${!user[@]}";do
     user_time[$u]=$(last | grep "${u}"| awk '{print $5, $6, $7, $8, $9 ,$10}')
@@ -68,6 +46,24 @@ for i in "${!user_time[@]}"; do
     echo "${i}"
     echo "${user_time[$i]}"
 done
+
+# a funçao que converte o tempo em minutos
+function convertTime(){
+
+    tempo=$1 
+    t=$(tempo:2:5)
+    a=${cut -d':'}
+    echo $t
+    
+
+
+}
+    x= $( echo "${user_time["miguel"]}" | awk '{print $6}' ) 
+    echo "---"  
+    echo ""
+
+
+
 
 
 # opções:
